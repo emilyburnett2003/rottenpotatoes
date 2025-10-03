@@ -38,13 +38,15 @@
 
     <tbody>
       <% @movies.each do |movie| %>
-        <tr>
-          <td><%= link_to movie.title, movie_path(movie) %></td>
-          <td><%= movie.rating %></td>
-          <td><%= movie.description %></td>
-          <td><%= movie.release_date %></td>
-          <td><%= link_to "Show", movie_path(movie), class: "btn btn-secondary btn-sm" %></td>
-        </tr>
+        <div id="movie_<%= movie.id %>">
+          <tr>
+            <td><%= link_to movie.title, movie_path(movie) %></td>
+            <td><%= movie.rating %></td>
+            <td><%= movie.description %></td>
+            <td><%= movie.release_date %></td>
+            <td><%= link_to "Show", movie_path(movie), class: "btn btn-secondary btn-sm" %></td>
+          </tr>
+        </div>
       <% end %>
     </tbody>
   </table>
