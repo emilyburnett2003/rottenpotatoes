@@ -7,7 +7,6 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
 
     @all_ratings = Movie.all_ratings
 
@@ -20,7 +19,7 @@ class MoviesController < ApplicationController
     @sort_by = params[:sort_by]
 
     @movies = Movie.with_ratings(@ratings_to_show)
-    @movies = @movies.order(@sort_by) if @sort_by.present?
+    @movies = @movies.order(@sort_by => :asc) if @sort_by.present?
   end
 
   def new
