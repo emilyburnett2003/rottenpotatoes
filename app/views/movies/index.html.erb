@@ -1,8 +1,10 @@
+<!-- app/views/movies/index.html.erb -->
 <h2>All Movies</h2>
 
 <% ratings_hash = @ratings_to_show.map { |r| [r, '1'] }.to_h %>
 
 <%= form_tag movies_path, method: :get, id: 'ratings_form', local: true do %>
+  <!-- Rating checkboxes -->
   <% @all_ratings.each do |rating| %>
     <div class="form-check form-check-inline">
       <%= check_box_tag "ratings[#{rating}]", "1",
@@ -13,6 +15,7 @@
     </div>
   <% end %>
 
+  <!-- Sort dropdown -->
   <div>
     <label class="form-label me-2" for="sort_by">Sort by:</label>
     <%= select_tag :sort_by,
@@ -23,11 +26,22 @@
                    class: "form-select d-inline w-auto" %>
   </div>
 
+  <!-- Refresh button -->
   <%= submit_tag 'Refresh', id: 'ratings_submit', class: 'btn btn-primary mb-3' %>
+<% end %>
 
-  <!-- Movie list as divs for autograder -->
-  <div id="movies">
-    <% @movies.each do |movie| %>
-      <div id="<%= dom_id movie %>">
-        <p><strong>Title:</strong> <%= link_to movie.title, movie_path(movie) %></p>
-        <p><strong>Rating:</strong> <%
+<!-- Movies list using divs (autograder-friendly) -->
+<div id="movies">
+  <% @movies.each do |movie| %>
+    <div id="<%= dom_id(movie) %>" class="movie">
+      <p><strong>Title:</strong> <%= link_to movie.title, movie_path(movie) %></p>
+      <p><strong>Rating:</strong> <%= movie.rating %></p>
+      <p><strong>Description:</strong> <%= movie.description %></p>
+      <p><strong>Release date:</strong> <%= movie.release_date %></p>
+      <p><%= link_to "Show this movie", movie_path(movie), class: "btn btn-secondary btn-sm" %></p>
+    </div>
+  <% end %>
+</div>
+
+<!-- Add new movie button -->
+<%= link_to 'Add new movie', new_movie_path, class: 'btn btn-primary mt-3' %>
