@@ -30,25 +30,26 @@
 
   <table class="table table-striped">
     <thead>
-      <tr>
-        <th><%= link_to "Title", movies_path(sort_by: "title", ratings: ratings_hash) %></th>
-        <th><%= link_to "Rating", movies_path(sort_by: "rating", ratings: ratings_hash) %></th>
-        <th>Description</th>
-        <th><%= link_to "Release date", movies_path(sort_by: "release_date", ratings: ratings_hash) %></th>
-      </tr>
-    </thead>
+  <tr>
+    <th>Title</th>
+    <th>Rating</th>
+    <th>Description</th>
+    <th>Release date</th>
+    <th>Actions</th>
+  </tr>
+</thead>
 
-    <tbody>
-      <% @movies.each do |movie| %>
-        <tr>
-          <td><%= movie.title %></td>
-          <td><%= movie.rating %></td>
-          <td><%= movie.description %></td>
-          <td><%= movie.release_date %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<tbody>
+  <% @movies.each do |movie| %>
+    <tr>
+      <td><%= movie.title %></td>
+      <td><%= movie.rating %></td>
+      <td><%= movie.description %></td>
+      <td><%= movie.release_date %></td>
+      <td><%= link_to "Show", movie_path(movie), class: "btn btn-secondary btn-sm" %></td>
+    </tr>
+  <% end %>
+</tbody>
 <% end %>
 
 <%= link_to 'Add new movie', new_movie_path, class: 'btn btn-primary' %>
